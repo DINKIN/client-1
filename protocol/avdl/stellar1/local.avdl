@@ -2,6 +2,7 @@
   import idl "common.avdl";
 
   array<Balance> balancesLocal(AccountID accountID);
+  PaymentResult sendLocal(string recipient, string amount, Asset asset);
 
   void walletInit();
 }
