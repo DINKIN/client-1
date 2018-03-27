@@ -2362,11 +2362,24 @@ func (s StellarBundle) CheckInvariants() error {
 	return nil
 }
 
+func (s StellarBundle) PrimaryAccount() (StellarEntry, error) {
+	for _, entry := range s.Accounts {
+		if entry.IsPrimary {
+			return entry, nil
+		}
+	}
+	return StellarEntry{}, errors.New("primary stellar account not found")
+}
+
 func (a StellarAccountID) String() string {
 	return string(a)
 }
 
 func (s StellarSecretKey) String() string {
+	return "DONOTLOGDONOTLOGDONOTLOGDONOTLOGDONOTLOGDONOTLOGDONOTLOG"
+}
+
+func (s StellarSecretKey) SecureNoLogString() string {
 	return string(s)
 }
 

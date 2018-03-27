@@ -21,7 +21,7 @@ func MakeNaclSigningKeyPairFromStellarAccountID(accountID keybase1.StellarAccoun
 }
 
 func MakeNaclSigningKeyPairFromStellarSecretKey(sec keybase1.StellarSecretKey) (res NaclSigningKeyPair, err error) {
-	byteSlice, err := strkey.Decode(strkey.VersionByteSeed, sec.String())
+	byteSlice, err := strkey.Decode(strkey.VersionByteSeed, sec.SecureNoLogString())
 	if err != nil {
 		return res, err
 	}
