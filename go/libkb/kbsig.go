@@ -15,6 +15,7 @@ import (
 	"fmt"
 
 	keybase1 "github.com/keybase/client/go/protocol/keybase1"
+	stellar1 "github.com/keybase/client/go/protocol/stellar1"
 	jsonw "github.com/keybase/go-jsonw"
 	triplesec "github.com/keybase/go-triplesec"
 )
@@ -746,7 +747,7 @@ func PerUserKeyProofReverseSigned(me *User, perUserKeySeed PerUserKeySeed, gener
 }
 
 // WalletProof creates a proof of a stellar wallet.
-func WalletProof(me *User, walletAddress keybase1.StellarAccountID,
+func WalletProof(me *User, walletAddress stellar1.AccountID,
 	signingKey GenericKey) (*jsonw.Wrapper, error) {
 	if me == nil {
 		return nil, fmt.Errorf("missing user object for proof")
@@ -795,8 +796,8 @@ func WalletProof(me *User, walletAddress keybase1.StellarAccountID,
 // Make a stellar proof with a reverse sig.
 // Modifies the User `me` with a sigchain bump and key delegation.
 // Returns a JSONPayload ready for use in "sigs" in sig/multi.
-func WalletProofReverseSigned(me *User, walletAddress keybase1.StellarAccountID,
-	walletSigner keybase1.StellarSecretKey, signer GenericKey) (JSONPayload, error) {
+func WalletProofReverseSigned(me *User, walletAddress stellar1.AccountID,
+	walletSigner stellar1.SecretKey, signer GenericKey) (JSONPayload, error) {
 	// Make reverse sig
 	jwRev, err := WalletProof(me, walletAddress, signer)
 	if err != nil {
